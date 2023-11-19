@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /*custom font*/
+    @import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+    /*basic reset*/
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html {}
+
+    body {
+      font-family: montserrat, arial, verdana;
+      background: transparent;
+    }
+
+    /*form styles*/
+    form {
+      text-align: center;
+      position: relative;
+      margin-top: 30px;
+    }
+
+    form fieldset {
+      background: white;
+      border: 0 none;
+      border-radius: 0px;
+      box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+      padding: 20px 30px;
+      box-sizing: border-box;
+      width: 80%;
+      margin: 0 10%;
+
+      /*stacking fieldsets above each other*/
+      /* position: relative; */
+    }
+
+    #vin-result div {
+      box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+      width: 500px;
+      padding: 3rem 0;
+    }
+
+    #vin-result {
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* height: 100vh; */
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .show {
+      display: block !important;
+    }
+
+    /*Hide all except first fieldset*/
+    form fieldset:not(:first-of-type) {
+      display: none;
+    }
+
+    /*inputs*/
+    form input,
+    form textarea,
+    select,
+    .step input {
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 0px;
+      /* margin-bottom: 10px; */
+      width: 100%;
+      box-sizing: border-box;
+      font-family: montserrat;
+      color: #2C3E50;
+      font-size: 13px;
+    }
+
+    input:focus,
+    textarea:focus {
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+      border: 1px solid #ee0979;
+      outline-width: 0;
+      transition: All 0.5s ease-in;
+      -webkit-transition: All 0.5s ease-in;
+      -moz-transition: All 0.5s ease-in;
+      -o-transition: All 0.5s ease-in;
+    }
+
+    /*buttons*/
+    form .action-button {
+      width: 100px;
+      background: #000000;
+      font-weight: bold;
+      color: white;
+      border: 0 none;
+      /* border-radius: 25px; */
+      cursor: pointer;
+      padding: 10px 5px;
+      margin: 10px 5px;
+    }
+
+    form .action-button:hover,
+    form .action-button:focus {
+      box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
+    }
+
+    form .action-button-previous {
+      width: 100px;
+      background: #C5C5F1;
+      font-weight: bold;
+      color: white;
+      border: 0 none;
+      border-radius: 25px;
+      cursor: pointer;
+      padding: 10px 5px;
+      margin: 10px 5px;
+    }
+
+    form .action-button-previous:hover,
+    form .action-button-previous:focus {
+      box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
+    }
+
+    /*headings*/
+    .fs-title {
+      font-size: 18px;
+      text-transform: uppercase;
+      color: #2C3E50;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      font-weight: bold;
+    }
+
+    .fs-subtitle {
+      font-weight: normal;
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    /* Add this style to your existing styles */
+    .error-message {
+      color: red;
+      margin: 1rem 0;
+      text-align: left;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .form {
+      display: none;
+    }
+
+    .form.active {
+      display: block;
+    }
+
+    .center {
+      text-align: center;
+
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+
+    .vin-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .vin-buttons div {
+      flex-direction: column;
+      display: flex;
+      gap: 1rem;
+
+    }
+
+    .vin-buttons button {
+      background: blueviolet;
+      border-radius: 30px;
+      outline: none;
+      padding: .6rem .6rem;
+      border: none;
+      color: white;
+      cursor: pointer;
+      width: 500px;
+      font-family: montserrat, arial, verdana;
+      transition: .7s;
+    }
+
+    .vin-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #form__type,
+    #form__type__2 {
+      width: 250px;
+      background: black;
+      color: white;
+      margin-bottom: 2rem;
+    }
+
+    .checkbox_input {
+      display: flex;
+      gap: 12px;
+    }
+
+    .check_form {
+      width: auto !important;
+    }
+
+    .form3 {
+      background: white;
+      border: 0 none;
+      border-radius: 0px;
+      box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+      padding: 20px 30px;
+      box-sizing: border-box;
+      width: 80%;
+      margin: 1rem 10%;
+    }
+
+    .form3 form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .check__flex {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      border: 1px solid rgb(104, 104, 104);
+      padding: 1rem;
+      border-radius: 9px;
+    }
+
+    .submit-buttons_form {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 1.5rem;
+    }
+
+    .submit-buttons_form .back_submit {
+      background: white;
+      padding: .6rem;
+      border: 1px solid blueviolet;
+      color: blueviolet;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: .7s;
+    }
+
+    .form3 {
+      display: none;
+    }
+
+    .submit-buttons_form .next_submit {
+      background: blueviolet;
+      padding: .6rem;
+      border: 1px solid white;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: .7s;
+    }
+
+    .submit-buttons_form .back_submit:hover {
+      color: white;
+      background: blueviolet;
+    }
+
+    .submit-buttons_form .next_submit:hover {
+      color: blueviolet;
+      background: white;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    @media screen and (max-width: 600px) {
+      #vin-result div {
+        width: 380px;
+        padding: 1.4rem 0;
+      }
+
+      .vin-buttons button {
+
+        width: 280px;
+      }
+    }
+  </style>
+
+  <style>
+    .my-form-container {
+      padding: 20px;
+      /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    }
+
+    .step {
+      display: none;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .form-row {
+      margin: 1rem 0;
+    }
+
+
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 20px;
+    }
+
+    .accordion-item {
+      border: 1px solid #ddd;
+      margin-bottom: 5px;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      background-color: #f1f1f1;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .accordion-content {
+      padding: 0 10px;
+
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+    }
+
+    .accordion-item.active .accordion-content {
+      max-height: 800px;
+      /* Adjust this value based on your content height */
+    }
+
+    .accordion-content label,
+    .form-row label {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .radio-container {
+      border: 1px solid #ccc;
+      padding: .6rem 1rem;
+    }
+
+    .accordion-content input[type="radio"],
+    .form-row input[type="radio"] {
+      width: auto;
+    }
+
+    .form-row label {
+      margin-bottom: .8rem;
+    }
+
+    .content-form {
+      padding: 1rem 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="row">
+
+    <div class="col-md-6 col-md-offset-3" id="form-container">
+
+      <form class="form form1" id="plateForm">
+        <fieldset>
+          <h2 class="fs-title">US Plate Decode</h2>
+          <h3 class="fs-subtitle">We cover only USA states</h3>
+          <select id="form__type">
+            <option selected value="one">US Plate Decode</option>
+            <option value="two">Market value by VIN number</option>
+          </select>
+
+          <div>
+            <select id="stateDropdown" name="state">
+              <option value="" disabled selected>Select a state</option>
+              <option value="AL">Alabama</option>
+              <option value="AK">Alaska</option>
+              <option value="AZ">Arizona</option>
+              <option value="AR">Arkansas</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="DE">Delaware</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="ID">Idaho</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="IA">Iowa</option>
+              <option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option>
+              <option value="LA">Louisiana</option>
+              <option value="ME">Maine</option>
+              <option value="MD">Maryland</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="MS">Mississippi</option>
+              <option value="MO">Missouri</option>
+              <option value="MT">Montana</option>
+              <option value="NE">Nebraska</option>
+              <option value="NV">Nevada</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option>
+              <option value="NY">New York</option>
+              <option value="NC">North Carolina</option>
+              <option value="ND">North Dakota</option>
+              <option value="OH">Ohio</option>
+              <option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="RI">Rhode Island</option>
+              <option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX">Texas</option>
+              <option value="UT">Utah</option>
+              <option value="VT">Vermont</option>
+              <option value="VA">Virginia</option>
+              <option value="WA">Washington</option>
+              <option value="WV">West Virginia</option>
+              <option value="WI">Wisconsin</option>
+              <option value="WY">Wyoming</option>
+            </select>
+            <div class="stateError error-message"></div>
+          </div>
+
+          <div>
+            <input type="text" placeholder="Enter licenced plate number" />
+            <div class="plateError error-message"></div>
+          </div>
+
+
+          <input type="submit" class="next action-button" value="Submit" />
+        </fieldset>
+      </form>
+
+      <form class="form form2" id="msform">
+        <fieldset>
+          <h2 class="fs-title">VIN number decode</h2>
+          <h3 class="fs-subtitle">We supports VIN from 1981 to 2023 and 17 digit VIN number.</h3>
+          <select id="form__type__2">
+            <option selected value="two">Market value by VIN number</option>
+            <option value="one">US Plate Decode</option>
+          </select>
+          <div>
+            <input id="vin-number" type="text" placeholder="Enter a valid VIN number" />
+            <div class="error-message" id="vin-error"></div>
+          </div>
+
+          <input type="submit" class="next action-button" value="Submit" />
+        </fieldset>
+
+      </form>
+
+    </div>
+    <div class="vin-wrap hidden">
+      <div id="vin-result">
+      </div>
+
+      <div class="vin-buttons">
+        <div>
+          <button id="vin-continue">Continue</button>
+          <button id="vin-edit">Edit Vehicle</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="form3" class="form3 show">
+
+
+
+      <div class="my-form-container">
+
+        <div class="step active" id="step1">
+          <div class="form-row">
+            <select name="" id="">
+              <option value="">Green</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <input type="text" placeholder="Ex. 120000">
+          </div>
+
+          <div>
+            <label for="">
+              <strong>Options</strong>
+            </label>
+            <p style="margin: 10px 0;">We focus only on the details that impact your car's value</p>
+
+            <div class="check__flex">
+              <div class="checkbox_input">
+                <input type="checkbox" class="check_form" id="altitude">
+                <label for="altitude">Altitude Pkg</label>
+              </div>
+              <div class="checkbox_input">
+                <input type="checkbox" class="check_form" id="lux_tech">
+                <label for="lux_tech">Lux Tech Group</label>
+              </div>
+              <div class="checkbox_input">
+                <input type="checkbox" class="check_form" id="power">
+                <label for="power">Power Sunroof</label>
+              </div>
+              <div class="checkbox_input">
+                <input type="checkbox" class="check_form" id="hitch">
+                <label for="hitch">w/o Tow Hitch</label>
+              </div>
+            </div>
+
+          </div>
+          <button style="margin: 1rem 0;" onclick="nextStep()">Next</button>
+        </div>
+
+        <div class="step" id="step2">
+          <h3>Tell us a little more about your vehicle so we can determine your offer.
+            Your offer will be finalized after condition has been verified by inspection
+          </h3>
+
+
+
+          <div class="accordion">
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <strong>What is the condition of the car?</strong>
+              </div>
+              <div class="accordion-content">
+                <div class="content-form">
+                  <label>
+                    <input type="radio" name="option1" value="option1">
+                    <span>Great</span>
+                  </label>
+
+                  <label>
+                    <input type="radio" name="option1" value="option1">
+                    <span>Good</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="option1" value="option1">
+                    <span>Fair</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="option1" value="option1">
+                    <span>Poor</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <strong>Are there active warning lights?</strong>
+              </div>
+              <div class="accordion-content">
+                <div class="content-form">
+                  <label>
+                    <input type="radio" name="option2" value="yes">
+                    <span>Yes</span>
+                  </label>
+
+                  <label>
+                    <input type="radio" name="option2" value="no">
+                    <span>No</span>
+                  </label>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <strong>Has the car been in an accident?</strong>
+              </div>
+              <div class="accordion-content">
+                <div class="content-form">
+                  <label>
+                    <input type="radio" name="option2" value="yes">
+                    <span>Yes</span>
+                  </label>
+
+                  <label>
+                    <input type="radio" name="option2" value="no">
+                    <span>No</span>
+                  </label>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <strong>Has the car been smoked in?</strong>
+              </div>
+              <div class="accordion-content">
+                <div class="content-form">
+                  <label>
+                    <input type="radio" name="option2" value="yes">
+                    <span>Yes</span>
+                  </label>
+
+                  <label>
+                    <input type="radio" name="option2" value="no">
+                    <span>No</span>
+                  </label>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <strong>Any active loan or lease on the car?</strong>
+              </div>
+              <div class="accordion-content">
+                <div class="content-form">
+                  <label>
+                    <input type="radio" name="option2" value="loan">
+                    <span>Loan</span>
+                  </label>
+
+                  <label>
+                    <input type="radio" name="option2" value="lease">
+                    <span>Lease</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="option2" value="none">
+                    <span>None</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <strong>How many keys are available?</strong>
+              </div>
+              <div class="accordion-content">
+                <div class="content-form">
+                  <label>
+                    <input type="radio" name="option2" value="1">
+                    <span>1</span>
+                  </label>
+
+                  <label>
+                    <input type="radio" name="option2" value="2">
+                    <span>2</span>
+                  </label>
+
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+
+          <button onclick="prevStep()">Back</button>
+          <button onclick="nextStep()">Next</button>
+        </div>
+
+        <div class="step" id="step3">
+          <h2>Why can we send your offer?</h2>
+          <div class="form-row">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName">
+          </div>
+
+          <div class="form-row">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName">
+          </div>
+
+          <div class="form-row">
+            <label for="lastName">Email</label>
+            <input type="email" id="email">
+          </div>
+
+          <div class="form-row">
+            <label for="phone">Phone</label>
+            <input type="number" id="phone">
+          </div>
+
+          <div class="form-row">
+            <label for="phone">What's the best way to reach you?</label>
+
+            <div class="radio-container">
+              <label>
+                <input type="radio" name="option2" value="yes">
+                <span>Email</span>
+              </label>
+
+              <label>
+                <input type="radio" name="option2" value="no">
+                <span>Phone</span>
+              </label>
+            </div>
+
+          </div>
+
+          <div class="form-row">
+            <label for="zipCode">Zip code</label>
+            <input type="number" id="zipCode">
+          </div>
+
+          <button onclick="prevStep()">Back</button>
+          <button onclick="submitForm()">Get My Offer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    let currentStep = 1;
+
+    function nextStep() {
+      document.getElementById(`step${currentStep}`).classList.remove('active');
+      currentStep++;
+      document.getElementById(`step${currentStep}`).classList.add('active');
+    }
+
+    function prevStep() {
+      document.getElementById(`step${currentStep}`).classList.remove('active');
+      currentStep--;
+      document.getElementById(`step${currentStep}`).classList.add('active');
+    }
+
+    function submitForm() {
+      // Perform form submission logic here
+      alert('Form submitted successfully!');
+    }
+
+    function toggleAccordion(element) {
+      const accordionItem = element.parentNode;
+      accordionItem.classList.toggle('active');
+    }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Get the dropdown element
+      const formTypeDropdown = document.getElementById("form__type");
+      const formTypeDropdown2 = document.getElementById("form__type__2");
+
+      // Get the forms
+      const form1 = document.getElementById("plateForm");
+      const form2 = document.getElementById("msform");
+
+      // Add an event listener to the dropdown for change events
+      formTypeDropdown.addEventListener("change", function () {
+        // Check the selected value
+        const selectedValue = formTypeDropdown.value;
+
+        // Hide both forms initially
+        form1.style.display = "none";
+        form2.style.display = "none";
+
+        // Show the selected form based on the dropdown value
+        if (selectedValue === "one") {
+          form1.style.display = "block";
+        } else if (selectedValue === "two") {
+          form2.style.display = "block";
+        }
+      });
+
+
+      // Add an event listener to the dropdown for change events
+      formTypeDropdown2.addEventListener("change", function () {
+        // Check the selected value
+        const selectedValue = formTypeDropdown2.value;
+
+        // Hide both forms initially
+        form1.style.display = "none";
+        form2.style.display = "none";
+
+        // Show the selected form based on the dropdown value
+        if (selectedValue === "one") {
+          form1.style.display = "block";
+        } else if (selectedValue === "two") {
+          form2.style.display = "block";
+        }
+      });
+    });
+  </script>
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get the form, dropdown, input elements, and error divs
+      var form = document.getElementById('msform');
+      var vinNumber = document.querySelector("#vin-number");
+      var vinError = document.querySelector("#vin-error")
+
+      // Add a submit event listener to the form
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        console.log(event);
+        // Reset error messages
+
+
+        // Check if a state is selected
+        if (vinNumber.value === "") {
+          event.preventDefault();
+          vinError.textContent = 'Enter valid vin number.';
+
+          // Remove the error message after 5 seconds
+          setTimeout(function () {
+            vinError.textContent = '';
+          }, 5000);
+        }
+
+
+
+        // If no errors, proceed to send data to the endpoint
+        if (vinNumber.value.trim() !== "") {
+          handleValueVin(vinNumber.value)
+        }
+      });
+
+
+
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get the form, dropdown, input elements, and error divs
+      var form = document.getElementById('plateForm');
+      var stateDropdown = form.querySelector('#stateDropdown');
+      var plateInput = form.querySelector('input[type="text"]');
+      var stateErrorDiv = form.querySelector('.stateError');
+      var plateErrorDiv = form.querySelector('.plateError');
+
+      // Add a submit event listener to the form
+      form.addEventListener('submit', function (event) {
+        // Reset error messages
+        stateErrorDiv.textContent = '';
+        plateErrorDiv.textContent = '';
+
+        // Check if a state is selected
+        if (stateDropdown.value === "") {
+          event.preventDefault();
+          stateErrorDiv.textContent = 'Please select a state.';
+          // Remove the error message after 5 seconds
+          setTimeout(function () {
+            stateErrorDiv.textContent = '';
+          }, 5000);
+        }
+
+        // Check if the license plate number is entered
+        if (plateInput.value.trim() === "") {
+          event.preventDefault();
+          plateErrorDiv.textContent = 'Please enter the license plate number.';
+          // Remove the error message after 5 seconds
+          setTimeout(function () {
+            plateErrorDiv.textContent = '';
+          }, 5000);
+        }
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get the form, dropdown, input elements, and error divs
+      var form = document.getElementById('plateForm');
+      var stateDropdown = form.querySelector('#stateDropdown');
+      var plateInput = form.querySelector('input[type="text"]');
+      var stateErrorDiv = form.querySelector('.stateError');
+      var plateErrorDiv = form.querySelector('.plateError');
+      const vinContainer = document.getElementById("vin-result");
+      const editVin = document.getElementById("vin-edit");
+      const continueVin = document.getElementById("vin-continue");
+      const form2 = document.getElementById("msform")
+      const form3 = document.getElementById("form3")
+      const results = document.querySelector(".vin-wrap");
+      const formContainer = document.getElementById("form-container")
+
+      continueVin.addEventListener("click", () => {
+        form3.classList.add("show");
+        formContainer.classList.add("hidden");
+        results.classList.add("hidden")
+        vinContainer.innerHTML = ``
+      })
+
+      editVin.addEventListener("click", () => {
+        formContainer.classList.add("show");
+        formContainer.classList.remove("hidden");
+        form3.classList.add("hidden")
+        results.classList.add("hidden")
+        vinContainer.innerHTML = ``
+      })
+
+      // Add a submit event listener to the form
+      form.addEventListener('submit', function (event) {
+        event.preventDefault()
+        // Reset error messages
+        stateErrorDiv.textContent = '';
+        plateErrorDiv.textContent = '';
+
+        // Check if a state is selected
+        if (stateDropdown.value === "") {
+          event.preventDefault();
+          stateErrorDiv.textContent = 'Please select a state.';
+          // Remove the error message after 5 seconds
+          setTimeout(function () {
+            stateErrorDiv.textContent = '';
+          }, 5000);
+        }
+
+        // Check if the license plate number is entered
+        if (plateInput.value.trim() === "") {
+          event.preventDefault();
+          plateErrorDiv.textContent = 'Please enter the license plate number.';
+          // Remove the error message after 5 seconds
+          setTimeout(function () {
+            plateErrorDiv.textContent = '';
+          }, 5000);
+        }
+
+        // If no errors, proceed to send data to the endpoint
+        if (stateDropdown.value !== "" && plateInput.value.trim() !== "") {
+          // console.log(plateInput, stateDropdown);
+          sendData(`https://api.vehicledatabases.com/license-decode/${plateInput.value}/${stateDropdown.value}`)
+        }
+      });
+
+      const showCarValue = async (data) => {
+        const trim = data.basic.trim;
+        const make = data.basic.make;
+        const model = data.basic.model;
+        const year = data.basic.year;
+        const vin = data.intro.vin
+
+        console.log(data)
+
+        displayVinResult(make, model, year, trim, vin)
+      }
+
+      const displayVinResult = async (make, model, year, trim, vin) => {
+        const vinContainer = document.getElementById("vin-result");
+        const results = document.querySelector(".vin-wrap");
+        var plateForm = document.getElementById('plateForm');
+        const forms = document.getElementById("form-container")
+        const vinDiv = document.createElement("div");
+        vinDiv.classList.add("center")
+
+        vinDiv.innerHTML = `
+          <h3>${year} ${make} ${model}</h3>
+          <p><strong>Trim: </strong>${trim}</p>
+          <p><strong>VIN: </strong>${vin}</p>
+        `
+        results.classList.remove("hidden")
+        forms.classList.add("hidden")
+        forms.classList.remove("show")
+        // plateForm.classList.add("hidden")
+        vinContainer.appendChild(vinDiv)
+      }
+
+      const clearVinResult = async () => {
+        const vinContainer = document.getElementById("vin-result");
+        const results = document.querySelector(".vin-wrap");
+        const forms = document.getElementById("form-container")
+        const vinDiv = document.createElement("div");
+        vinDiv.classList.add("center")
+
+        vinDiv.innerHTML = `
+          
+        `
+        results.classList.remove("hidden")
+        forms.classList.remove("show")
+        forms.classList.add("hidden")
+        vinContainer.appendChild(vinDiv)
+      }
+
+
+
+      const handleValueVin = async (vin) => {
+        console.log(vin);
+        const endpoint = `https://api.vehicledatabases.com/market-value/${vin}`
+        fetch(endpoint, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-Authkey': '74d26fec4e894be980169a93a2f217b5'
+          },
+
+        })
+          .then(response => response.json())
+          .then(result => {
+            console.log('Yes');
+            showCarValue(result.data)
+          })
+          .catch(error => {
+            console.error('Error sending data:', error);
+            window.parent.postMessage("Plate number", "*");
+            // You can handle errors here
+          });
+      }
+
+
+
+
+      // Function to send data to the specified endpoint
+      function sendData(endpoint) {
+        // You can use fetch or any other method to send data to the endpoint
+        fetch(endpoint, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-Authkey': '74d26fec4e894be980169a93a2f217b5'
+          },
+
+        })
+          .then(response => response.json())
+          .then(result => {
+            console.log('Data sent successfully:', result.data.intro.vin);
+            // You can add further actions if needed
+
+            handleValueVin(result.data.intro.vin)
+
+          })
+          .catch(error => {
+            console.error('Error sending data:', error);
+            window.parent.postMessage("Plate number", "*");
+            // You can handle errors here
+          });
+      }
+    });
+  </script>
+</body>
+
+</html>
